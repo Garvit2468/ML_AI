@@ -8,6 +8,7 @@ sd = cv2.CascadeClassifier(
 
 vid = cv2.VideoCapture(0)
 notcaptured = True
+seq =0
 while notcaptured:
     flag, img = vid.read()
     if flag:
@@ -33,9 +34,14 @@ while notcaptured:
             )
 
             if len(smiles) == 1:
-                cv2.imwrite('myselfie.png',img)
-                notcaptured = False
-                break
+                seq += 1
+                print(seq)
+                if seq == 5:
+                    cv2.imwrite('myselfie.png',img)
+                    notcaptured = False
+                    break
+            else:
+                seq == 0
 
             cv2.rectangle(
                 img, pt1=(x,y), pt2=(x+w, y+h), color=colors[i],thickness=8
